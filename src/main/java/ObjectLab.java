@@ -130,8 +130,7 @@ public class ObjectLab
     // Careful: the class name appears twice for two different reasons, and
     // both are required. Dropping new, as in Rectangle big = Rectangle(3, 4);
     // does not compile -- Java goes hunting for a method named Rectangle and
-    // never finds one. That is the most common written error on a free
-    // response question.
+    // never finds one.
     // ---------------------------------------------------------------
     public static int rectangleArea(int width, int height)
     {
@@ -190,9 +189,8 @@ public class ObjectLab
     // Example: countAfterAdding(0, 0) is 0
     //
     // Careful: int n = c.addPoints(7); is a COMPILE error, not a run-time
-    // error. addPoints is void, so there is no value there to assign. Test
-    // questions describe that one as a run-time error constantly, and it is
-    // not.
+    // error. addPoints is void, so there is no value there to assign, and the
+    // compiler says so before the program ever runs.
     // ---------------------------------------------------------------
     public static int countAfterAdding(int start, int points)
     {
@@ -207,12 +205,12 @@ public class ObjectLab
     //
     //     start
     //     building <size>
-    //     back in main
+    //     back in announceBuild
     //
     // You must print only the first and third lines yourself. The middle line
     // is printed BY THE TIMER CONSTRUCTOR when you build a Timer, so your
     // method body is: print "start", build a Timer with new, print
-    // "back in main".
+    // "back in announceBuild".
     //
     // A constructor call interrupts the sequential execution of statements.
     // Control jumps into the constructor body, runs it all the way to its
@@ -223,14 +221,15 @@ public class ObjectLab
     // Example: announceBuild(30) prints
     //              start
     //              building 30
-    //              back in main
+    //              back in announceBuild
     //
     // This part is checked character for character, so do NOT print anything
     // else here, and do not print the middle line yourself.
     // ---------------------------------------------------------------
     public static void announceBuild(int size)
     {
-        // TODO Part 4: print "start", build a Timer with new, print "back in main"
+        // TODO Part 4: print "start", build a Timer with new, then print
+        // "back in announceBuild"
     }
 
     // ---------------------------------------------------------------
@@ -242,7 +241,7 @@ public class ObjectLab
     //     1. build a Counter named a, starting at start
     //     2. make a second name b that points at THAT SAME OBJECT
     //        (one line, and it must not use new)
-    //     3. build a third Counter named c, also starting at start, with new
+    //     3. build a second Counter named c, also starting at start, with new
     //     4. add points through b
     //     5. return a.getCount() + c.getCount()
     //
@@ -287,8 +286,15 @@ public class ObjectLab
     // ==. The .equals method is the one that looks at the contents; you will
     // meet it properly in Topic 1.15, and here it is only the contrast.
     //
+    // One warning if you experiment in main: two identical String LITERALS,
+    // as in compareTwoWays("cat", "cat"), give "true true". Java keeps one
+    // shared copy of a repeated literal, so both names reach the same object
+    // and no second object was ever built. To get two separate objects
+    // holding the same characters you have to ask for them, which is why main
+    // below writes new String("cat").
+    //
     // A boolean joined to a String with + becomes the text "true" or "false",
-    // which is the concatenation you already know from Topic 1.4.
+    // which is the concatenation you already know from Topic 1.3.
     //
     // Example: two separate String objects both holding "cat" give
     //          "false true"
@@ -316,10 +322,15 @@ public class ObjectLab
     // So the returned value looks like "true false" -- and nothing else.
     //
     // A variable of a reference type holds an object reference or, if there
-    // is no object, NULL. String s; followed by no constructor call leaves
-    // you a name with nothing on the other end of the arrow. Declaring is not
-    // creating; only a new call, or an assignment from something that already
-    // points at an object, fills it in.
+    // is no object, NULL. String s = null; gives you a name with nothing on
+    // the other end of the arrow. Declaring is not creating; only a new call,
+    // or an assignment from something that already points at an object, fills
+    // it in.
+    //
+    // A local variable you declare and never assign, as in String s; on its
+    // own, does not hold null either. It holds nothing at all, and Java
+    // refuses to compile any use of it, even s == null. When you want a
+    // reference that points at no object, assign null yourself.
     //
     // null is neither zero nor the empty string. The way you ask is
     // x == null, which is the one comparison you may always make on a
@@ -354,6 +365,8 @@ public class ObjectLab
         System.out.println("countAfterAdding(2, 5)  = " + countAfterAdding(2, 5));
         System.out.println("aliasTotal(2, 5)        = " + aliasTotal(2, 5));
 
+        // new String forces a SECOND object holding "cat". Writing the literal
+        // "cat" twice would hand back one shared object and print "true true".
         String cat = "cat";
         String sameCat = new String("cat");
         System.out.println("compareTwoWays          = " + compareTwoWays(cat, sameCat));

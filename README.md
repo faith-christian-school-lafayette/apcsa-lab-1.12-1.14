@@ -52,8 +52,10 @@ Your teacher will run a separate set of tests on your work when you turn it in.
 
 - [ ] Every `TODO` comment has been replaced with real code.
 - [ ] `mvn -q compile exec:java` runs without errors.
-- [ ] Every object you use was built with `new`. Count the `new` calls in a
-      part and you have counted its objects.
+- [ ] In Parts 1 through 5, every object you use was built with `new`. Count
+      the `new` calls in one of those parts and you have counted its objects.
+      Parts 6 and 7 are different: the objects there are handed to you as
+      parameters, so you build nothing.
 - [ ] Part 4 prints exactly three lines and you wrote only two of them. If
       `building` is missing, you never built the `Timer`.
 - [ ] Part 5 uses `new` exactly twice. If it appears three times, step 2 built
@@ -80,3 +82,7 @@ System.out.println("this line never runs");
 It compiles cleanly, so this is not a syntax error. Write down the complete
 output — everything that really printed before the program stopped — then name
 the error exactly and say the moment it happened.
+
+Run this one from your IDE rather than with `mvn -q compile exec:java`. Maven
+catches the error and reprints it as a build failure, so the name you are
+looking for never appears on screen.
